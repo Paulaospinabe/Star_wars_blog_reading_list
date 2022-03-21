@@ -1,15 +1,52 @@
-import React from "react";
-import rigoImage from "../../img/rigo-baby.jpg";
-import "../../styles/home.css";
+import React, { useContext } from "react";
+import Cards from "../component/Cards";
 
-export const Home = () => (
-	<div className="text-center mt-5">
-		<h1>Hello Rigo!</h1>
-		<p>
-			<img src={rigoImage} />
-		</p>
-		<a href="#" className="btn btn-success">
-			If you see this green button, bootstrap is working
-		</a>
-	</div>
-);
+
+import "../../styles/home.css";
+import { Context } from "../store/appContext";
+import propTypes from "prop-types";
+
+
+export const Home = () => {
+	const { store, actions } = useContext(Context)
+	console.log(store)
+	return (
+		<div>
+			<div className="container-fluid" style={{ padding: "1em 5rem 5%" }}>
+				<h1 style={{ color: "red" }}>Characters</h1>
+				<br></br>
+				<div className="row flex-nowrap, d-flex flex-row flex-nowrap overflow-auto w-auto">
+					{store.Personajeinfo.map((item, index) => {
+
+					return (
+
+						<div className="col-3" key={index} >
+
+
+
+							<Cards type={"Personaje"} uid={item.uid} name={item.name} />
+
+						</div>)
+				})}
+				</div>
+				<br></br>
+				<h1 style={{ color: "red" }}>Planets</h1>
+				<br></br>
+				<div className="row flex-nowrap, d-flex flex-row flex-nowrap overflow-auto w-auto">
+					{store.Planetasinfo.map((item, index) => {
+					return (
+						<div className="col-3" key={index} >
+
+
+
+							<Cards type={"Planetas"} uid={item.uid} name={item.name} />
+
+						</div>)
+				})}
+				</div>
+			</div></div>
+
+
+
+	);
+}
